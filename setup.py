@@ -25,7 +25,7 @@ setup(
     author_email='andrew@maccas.net',
     license='BSD',
     url='https://github.com/amacd31/catchment_cutter',
-    install_requires=['numpy', 'pandas'],
+    install_requires=['numpy', 'gdal', 'shapely', 'fiona'],
     packages = ['catchment_cutter'],
     test_suite = 'tests',
     classifiers=[
