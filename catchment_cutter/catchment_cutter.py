@@ -5,6 +5,16 @@ from shapely.geometry import shape
 from shapely.wkt import loads as load_wkt
 
 def get_grid_cells(boundary_file, grid_file):
+    """
+        Return the grid cells from a grid file that fall within the boundary of the boundary file.
+
+        :param boundary_file: The path to file defining the boundary of the catchment. i.e. a geojson file.
+        :type boundary_file: string
+        :param grid_file: Path to ASCII grid file to find coordinates within the boundary.
+        :type grid_file: string
+
+        :returns: Array of lat/longs.
+    """
 
     grid = gdal.Open(grid_file, gdal.GA_ReadOnly)
 
