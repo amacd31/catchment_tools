@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import unittest
 
-from catchment_cutter import get_grid_cells
+from catchment_tools import get_grid_cells
 
 class CatchmentCutterTest(unittest.TestCase):
 

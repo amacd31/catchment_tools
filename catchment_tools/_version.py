@@ -158,8 +158,8 @@ def versions_from_parentdir(parentdir_prefix, root, verbose=False):
     return {"version": dirname[len(parentdir_prefix):], "full": ""}
 
 tag_prefix = "v"
-parentdir_prefix = "catchment_cutter-"
-versionfile_source = "catchment_cutter/_version.py"
+parentdir_prefix = "catchment_tools-"
+versionfile_source = "catchment_tools/_version.py"
 
 def get_versions(default={"version": "unknown", "full": ""}, verbose=False):
     # I am in _version.py, which lives at ROOT/VERSIONFILE_SOURCE. If we have

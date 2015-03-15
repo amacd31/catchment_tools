@@ -1,2 +1,2 @@
 include versioneer.py
-include catchment_cutter/_version.py
+include catchment_tools/_version.py

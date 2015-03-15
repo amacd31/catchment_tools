@@ -2,10 +2,10 @@ import os
 from io import open
 
 import versioneer
-versioneer.versionfile_source = 'catchment_cutter/_version.py'
-versioneer.versionfile_build = 'catchment_cutter/_version.py'
+versioneer.versionfile_source = 'catchment_tools/_version.py'
+versioneer.versionfile_build = 'catchment_tools/_version.py'
 versioneer.tag_prefix = 'v'
-versioneer.parentdir_prefix = 'catchment_cutter-'
+versioneer.parentdir_prefix = 'catchment_tools-'
 
 from setuptools import setup
 
@@ -16,17 +16,17 @@ with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
         ])
 
 setup(
-    name='catchment_cutter',
+    name='catchment_tools',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    description='Library for selecting grid points based on catchment boundaries.',
+    description='Library for performing operations based on catchment boundaries.',
     long_description=long_description,
     author='Andrew MacDonald',
     author_email='andrew@maccas.net',
     license='BSD',
-    url='https://github.com/amacd31/catchment_cutter',
+    url='https://github.com/amacd31/catchment_tools',
     install_requires=['numpy', 'gdal', 'shapely', 'fiona'],
-    packages = ['catchment_cutter'],
+    packages = ['catchment_tools'],
     test_suite = 'tests',
     classifiers=[
         'Development Status :: 3 - Alpha',

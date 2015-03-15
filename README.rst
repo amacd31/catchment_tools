@@ -1,4 +1,4 @@
-Catchment cutter
+Catchment tools
 ===============
 
 Simple library for calculating catchment grid cells that fall within a catchment boundary.
@@ -13,7 +13,7 @@ Usage
 
 .. code:: python
 
-    from catchment_cutter import get_grid_cells
+    from catchment_tools import get_grid_cells
 
     grid_file = 'grid_file.asc' # ASCII grid file of cells
     boundary = 'catchment_boundary.json' # GeoJSON catchment boundary
