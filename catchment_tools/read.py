@@ -36,7 +36,7 @@ def get_masked_image(ascii):
 
     return masked_image, gt
 
-def get_values_for_catchments(ascii, catchments):
+def get_values_for_catchments(ascii, catchments, func = None):
     """
         Read the values for all points inside each of the supplied catchments.
 
@@ -45,6 +45,8 @@ def get_values_for_catchments(ascii, catchments):
         :type ascii: string
         :param catchments: Dictionary of catchments and their grid points.
         :type catchments: dict
+        :param func: Function to apply to the grid values array for each catchment.
+        :type func: function
     """
     mi, gt = get_masked_image(ascii)
 
@@ -58,6 +60,9 @@ def get_values_for_catchments(ascii, catchments):
             x, y = lat_long_to_idx(gt, point[0], point[1])
             catchment_values.append(mi[x][y])
 
-        results[catchment] = catchment_values
+        if func is None:
+            results[catchment] = catchment_values
+        else:
+            results[catchment] = func(catchment_values)
 
     return results
