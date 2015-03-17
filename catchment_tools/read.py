@@ -58,7 +58,7 @@ def get_values_for_catchments(ascii, catchments, func = None):
         catchment_values = []
         for point in points:
             x, y = lat_long_to_idx(gt, point[0], point[1])
-            catchment_values.append(mi[x][y])
+            catchment_values.append(mi[x,y])
 
         if func is None:
             results[catchment] = catchment_values
