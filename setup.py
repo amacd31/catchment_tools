@@ -8,6 +8,11 @@ versioneer.tag_prefix = 'v'
 versioneer.parentdir_prefix = 'catchment_tools-'
 
 from setuptools import setup
+try:
+    from Cython.Build import cythonize
+    ext_modules = cythonize("catchment_tools/read.py")
+except:
+    ext_modules = []
 
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
@@ -27,6 +32,7 @@ setup(
     url='https://github.com/amacd31/catchment_tools',
     install_requires=['numpy', 'gdal', 'shapely', 'fiona'],
     packages = ['catchment_tools'],
+    ext_modules = ext_modules,
     test_suite = 'tests',
     classifiers=[
         'Development Status :: 3 - Alpha',
