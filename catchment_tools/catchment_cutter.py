@@ -4,7 +4,7 @@ from osgeo import gdal
 from shapely.geometry import shape
 from shapely.wkt import loads as load_wkt
 
-def get_grid_cells(boundary_file, grid_file):
+def get_grid_cells(boundary_file, grid_file, area_percent_match = 0.3):
     """
         Return the grid cells from a grid file that fall within the boundary of the boundary file.
 
@@ -12,6 +12,8 @@ def get_grid_cells(boundary_file, grid_file):
         :type boundary_file: string
         :param grid_file: Path to ASCII grid file to find coordinates within the boundary.
         :type grid_file: string
+        :param area_match_percent: Ratio of how much of the grid cell needs to be overlapped by the boundary for inclusion. Defaults to 0.3 (30%).
+        :type area_match_percent: float
 
         :returns: Array of lat/longs.
     """
@@ -59,8 +61,8 @@ def get_grid_cells(boundary_file, grid_file):
 
                 intersection = catchment_geom.intersection(pt)
 
-                # Include cell if more than 30% is inside the catchment geometry
-                if intersection.area > 0.3 * pt.area:
+                # Include cell if more than area_percent_match is inside the catchment geometry
+                if intersection.area > area_percent_match * pt.area:
                     grid_cells.append((lon, lat))
 
     return grid_cells
