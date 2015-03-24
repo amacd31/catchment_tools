@@ -64,6 +64,10 @@ def get_grid_cells(boundary_file, grid_file, area_percent_match = 0.3):
                 # Include cell if more than area_percent_match is inside the catchment geometry
                 if intersection.area > area_percent_match * pt.area:
                     grid_cells.append((lon, lat))
+                # If the catchment is smaller than a single grid cell and it intersects with
+                # the current cell at all then include it.
+                elif catchment_geom.area < pt.area and intersection.area >= 0.0001:
+                    grid_cells.append((lon, lat))
 
     return grid_cells
 
