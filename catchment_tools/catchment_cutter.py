@@ -4,7 +4,7 @@ from osgeo import gdal
 from shapely.geometry import shape
 from shapely.wkt import loads as load_wkt
 
-def get_grid_cells(boundary_file, grid_file, area_percent_match = 0.3):
+def get_grid_cells(boundary_file, grid_file, match_threshold = 0.3, intersect_threshold = 0.0001):
     """
         Return the grid cells from a grid file that fall within the boundary of the boundary file.
 
@@ -12,8 +12,19 @@ def get_grid_cells(boundary_file, grid_file, area_percent_match = 0.3):
         :type boundary_file: string
         :param grid_file: Path to ASCII grid file to find coordinates within the boundary.
         :type grid_file: string
-        :param area_match_percent: Ratio of how much of the grid cell needs to be overlapped by the boundary for inclusion. Defaults to 0.3 (30%).
-        :type area_match_percent: float
+        :param match_threshold: Ratio of how much of the grid cell needs to be
+                                overlapped by the boundary for inclusion.
+                                Defaults to 0.3 (30%).
+        :type match_threshold: float
+        :param intersect_threshold: If the catchment area is smaller than a
+                                    single grid cell this threshold will be
+                                    used to determine if the cell is included
+                                    by checking that the area of the catchment
+                                    intersecting is >= intersect threshold.
+                                    Set to 0 to include any cell the catchment
+                                    intersects with.
+                                    Defaults to 0.0001.
+        :type intersect_threshold: float
 
         :returns: Array of lat/longs.
     """
@@ -61,12 +72,14 @@ def get_grid_cells(boundary_file, grid_file, area_percent_match = 0.3):
 
                 intersection = catchment_geom.intersection(pt)
 
-                # Include cell if more than area_percent_match is inside the catchment geometry
-                if intersection.area > area_percent_match * pt.area:
+                # Include cell if more than match_threshold is inside the catchment geometry
+                if intersection.area > match_threshold * pt.area:
                     grid_cells.append((lon, lat))
                 # If the catchment is smaller than a single grid cell and it intersects with
-                # the current cell at all then include it.
-                elif catchment_geom.area < pt.area and intersection.area >= 0.0001:
+                # the current cell at all and the intersection area is greater than the threshold,
+                # include it.
+                elif catchment_geom.area < pt.area and intersection.area > 0 and \
+                    intersection.area >= intersect_threshold:
                     grid_cells.append((lon, lat))
 
     return grid_cells
