@@ -2,10 +2,6 @@ import os
 from io import open
 
 import versioneer
-versioneer.versionfile_source = 'catchment_tools/_version.py'
-versioneer.versionfile_build = 'catchment_tools/_version.py'
-versioneer.tag_prefix = 'v'
-versioneer.parentdir_prefix = 'catchment_tools-'
 
 from setuptools import setup
 try:
