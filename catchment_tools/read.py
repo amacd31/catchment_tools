@@ -51,7 +51,7 @@ def get_values_for_catchments(ascii, catchments, func = None):
     mi, gt = get_masked_image(ascii)
 
     results = {}
-    for catchment, points in catchments.iteritems():
+    for catchment, points in catchments.items():
         # TODO: Properly handle small/null catchments.
         if len(points) <= 2:
             continue
